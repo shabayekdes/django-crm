@@ -3,11 +3,19 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
 
-from leads.forms import LeadForm
+from leads.forms import LeadForm, CustomUserCreationForm
 from leads.models import Lead
 
 
 # Create your views here.
+class SignupView(generic.CreateView):
+    template_name = "registration/signup.html"
+    form_class = CustomUserCreationForm
+
+    def get_success_url(self):
+        return reverse("login")
+
+
 class LandPageTemplateView(generic.TemplateView):
     template_name = "landing.html"
 
